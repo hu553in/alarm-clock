@@ -1,5 +1,6 @@
 import SwiftUI
 
+// TODO: fix alarm notification
 // TODO: fix wake up check
 // TODO: force alarm notification to repeat until closed
 // TODO: persist alarms

@@ -4,6 +4,7 @@ on:
   push:
     branches: ["main"]
 
+# TODO: add SwiftLint
 jobs:
   main:
     runs-on: macos-latest
