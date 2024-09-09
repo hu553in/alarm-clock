@@ -4,7 +4,6 @@ on:
   push:
     branches: ["main"]
 
-# TODO: add steps
 jobs:
   main:
     runs-on: macos-latest
@@ -14,3 +13,29 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Build project
+        run: |
+          cd $RUNNER_TEMP
+          xcodebuild \
+              -project ./AlarmClock.xcodeproj \
+              -scheme AlarmClock \
+              -sdk iphoneos \
+              -configuration Release \
+              CODE_SIGN_IDENTITY="" \
+              CODE_SIGNING_REQUIRED=NO
+
+      - name: Construct IPA
+        run: |
+          cd ~/Library/Developer/Xcode/DerivedData/AlarmClock-*/Build/Products/Release-iphoneos
+          mkdir ./Payload
+          mv ./AlarmClock.app ./Payload/AlarmClock.app
+          zip -r ./AlarmClock.ipa ./Payload
+          mv ./AlarmClock.ipa $RUNNER_TEMP/AlarmClock.ipa
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: AlarmClock.ipa
+          path: $RUNNER_TEMP/AlarmClock.ipa
+          retention-days: 90
