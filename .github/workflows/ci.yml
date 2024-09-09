@@ -32,6 +32,8 @@ jobs:
           mv ./AlarmClock.app ./Payload/AlarmClock.app
           zip -r ./AlarmClock.ipa ./Payload
           mv ./AlarmClock.ipa $GITHUB_WORKSPACE/
+          cd $GITHUB_WORKSPACE
+          ls -al
 
       - name: Upload IPA
         uses: actions/upload-artifact@v4
