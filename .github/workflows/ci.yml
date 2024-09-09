@@ -30,9 +30,9 @@ jobs:
         run: |
           cd ~/Library/Developer/Xcode/DerivedData/AlarmClock-*/Build/Products/Release-iphoneos
           mkdir ./Payload
-          mv ./AlarmClock.app ./Payload/AlarmClock.app
-          zip -r ./AlarmClock.ipa ./Payload
-          mv ./AlarmClock.ipa ${{ github.workspace }}/
+          mv ./AlarmClock.app ./Payload/
+          ditto -c -k --sequesterRsrc --keepParent ./Payload AlarmClock.zip
+          mv ./AlarmClock.zip ${{ github.workspace }}/AlarmClock.ipa
 
       - name: Wait for IPA construction
         run: sleep 5
