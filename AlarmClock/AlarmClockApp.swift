@@ -1,5 +1,7 @@
 import SwiftUI
 
+// TODO: add app icon
+// TODO: fix project structure
 // TODO: fix alarm notification
 // TODO: fix wake up check
 // TODO: force alarm notification to repeat until closed
