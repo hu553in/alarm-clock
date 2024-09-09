@@ -1,15 +1,16 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches: ["main"]
 
 # TODO: add steps
 jobs:
   main:
     runs-on: macos-latest
-    if: github.ref == 'refs/heads/main'
     steps:
       - name: Check Xcode version
         run: /usr/bin/xcodebuild -version
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
