@@ -16,7 +16,7 @@ jobs:
 
       - name: Build project
         run: |
-          cd $GITHUB_WORKSPACE/alarm-clock
+          cd $GITHUB_WORKSPACE
           xcodebuild \
               -project ./AlarmClock.xcodeproj \
               -scheme AlarmClock \
@@ -31,11 +31,11 @@ jobs:
           mkdir ./Payload
           mv ./AlarmClock.app ./Payload/AlarmClock.app
           zip -r ./AlarmClock.ipa ./Payload
-          mv ./AlarmClock.ipa $GITHUB_WORKSPACE/alarm-clock/AlarmClock.ipa
+          mv ./AlarmClock.ipa $GITHUB_WORKSPACE/AlarmClock.ipa
 
       - name: Upload IPA
         uses: actions/upload-artifact@v4
         with:
           name: AlarmClock.ipa
-          path: $GITHUB_WORKSPACE/alarm-clock/AlarmClock.ipa
+          path: $GITHUB_WORKSPACE/AlarmClock.ipa
           retention-days: 90
