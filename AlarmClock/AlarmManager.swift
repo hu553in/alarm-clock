@@ -87,12 +87,17 @@ class AlarmManager: ObservableObject {
         content.sound = UNNotificationSound.default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: alarm.wakeUpCheckDelay, repeats: false)
-        let request = UNNotificationRequest(identifier: "wakeUpCheck_\(alarm.id.uuidString)", content: content, trigger: trigger)
+        let request = UNNotificationRequest(
+            identifier: "wakeUpCheck_\(alarm.id.uuidString)",
+            content: content,
+            trigger: trigger
+        )
 
         UNUserNotificationCenter.current().add(request)
 
         // Schedule alarm repeat if wake-up check is not confirmed
-        DispatchQueue.main.asyncAfter(deadline: .now() + alarm.wakeUpCheckDelay + 60) { // wake-up check delay + 1 minute for confirmation
+        // (wake-up check delay + 1 minute for confirmation)
+        DispatchQueue.main.asyncAfter(deadline: .now() + alarm.wakeUpCheckDelay + 60) {
             self.checkWakeUpConfirmation(alarm: alarm)
         }
     }
@@ -118,7 +123,11 @@ class AlarmManager: ObservableObject {
         content.sound = UNNotificationSound(named: UNNotificationSoundName("ultra_loud_alarm.wav"))
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: "repeat_\(alarm.id.uuidString)", content: content, trigger: trigger)
+        let request = UNNotificationRequest(
+            identifier: "repeat_\(alarm.id.uuidString)",
+            content: content,
+            trigger: trigger
+        )
 
         UNUserNotificationCenter.current().add(request)
     }

@@ -30,7 +30,7 @@ struct AlarmRow: View {
             Spacer()
             Toggle("", isOn: Binding(
                 get: { alarm.isEnabled },
-                set: { newValue in
+                set: { _ in
                     alarmManager.toggleAlarm(alarm)
                 }
             )).disabled(alarmManager.isToggling)
@@ -38,14 +38,14 @@ struct AlarmRow: View {
         .contextMenu {
             Button(action: {
                 alarmManager.duplicateAlarm(alarm)
-            }) {
+            }, label: {
                 Label("Duplicate", systemImage: "plus.square.on.square")
-            }
+            })
             Button(action: {
                 showingDeleteConfirmation = true
-            }) {
+            }, label: {
                 Label("Delete", systemImage: "trash")
-            }
+            })
         }
         .alert(isPresented: $showingDeleteConfirmation) {
             Alert(

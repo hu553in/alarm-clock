@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct AlarmClockApp: App {
     init() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             if granted {
                 print("Notification permission granted")
             } else {

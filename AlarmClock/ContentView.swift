@@ -15,9 +15,11 @@ struct ContentView: View {
             .navigationTitle("Alarms")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showingAddAlarm = true }) {
+                    Button(action: {
+                        showingAddAlarm = true
+                    }, label: {
                         Image(systemName: "plus")
-                    }
+                    })
                 }
             }
         }
