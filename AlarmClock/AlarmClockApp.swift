@@ -1,5 +1,7 @@
 import SwiftUI
 
+// TODO: do we need labels?
+// TODO: move wav file to assets
 // TODO: add app icon
 // TODO: fix project structure
 // TODO: fix alarm notification
