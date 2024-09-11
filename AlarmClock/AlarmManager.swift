@@ -1,7 +1,6 @@
 import Foundation
 import UserNotifications
 
-// TODO: refactor duplicated code
 class AlarmManager: ObservableObject {
     @Published var alarms: [Alarm] = []
     @Published var isToggling = false
@@ -15,22 +14,8 @@ class AlarmManager: ObservableObject {
         isToggling = true
         if let index = alarms.firstIndex(where: { $0.id == alarm.id }) {
             DispatchQueue.global(qos: .userInitiated).async {
-                let calendar = Calendar.current
-                let currentTime = calendar.dateComponents([.hour, .minute], from: Date())
-                let alarmTime = calendar.dateComponents([.hour, .minute], from: alarm.time)
-
-                // Calculate time difference in minutes
-                let currentMinutes = currentTime.hour! * 60 + currentTime.minute!
-                let alarmMinutes = alarmTime.hour! * 60 + alarmTime.minute!
-                var timeDifference = alarmMinutes - currentMinutes
-
-                // Adjust for cases where the alarm is set for the next day
-                if timeDifference < 0 {
-                    timeDifference += 24 * 60
-                }
-
-                // Convert timeDifference to seconds for comparison with lockTime
-                let timeDifferenceSeconds = TimeInterval(timeDifference * 60)
+                // Calculate timeDifferenceSeconds for comparison with lockTime
+                let timeDifferenceSeconds = calculateTimeDifferenceSeconds(alarm)
 
                 DispatchQueue.main.async {
                     if timeDifferenceSeconds > 0 && timeDifferenceSeconds < alarm.lockTime && alarm.isEnabled {
@@ -133,10 +118,12 @@ class AlarmManager: ObservableObject {
     }
 
     func duplicateAlarm(_ alarm: Alarm) {
+        let trimmedLabel = alarm.label.trimmingCharacters(in: .whitespacesAndNewlines)
+        let newLabel = trimmedLabel.isEmpty ? "" : "\(trimmedLabel) (Copy)"
         let newAlarm = Alarm(
             time: alarm.time,
             isEnabled: false,
-            label: "\(alarm.label) (Copy)",
+            label: newLabel,
             lockTime: alarm.lockTime,
             wakeUpCheckDelay: alarm.wakeUpCheckDelay
         )
@@ -145,22 +132,8 @@ class AlarmManager: ObservableObject {
 
     func deleteAlarm(_ alarm: Alarm) {
         if let index = alarms.firstIndex(where: { $0.id == alarm.id }) {
-            let calendar = Calendar.current
-            let currentTime = calendar.dateComponents([.hour, .minute], from: Date())
-            let alarmTime = calendar.dateComponents([.hour, .minute], from: alarm.time)
-
-            // Calculate time difference in minutes
-            let currentMinutes = currentTime.hour! * 60 + currentTime.minute!
-            let alarmMinutes = alarmTime.hour! * 60 + alarmTime.minute!
-            var timeDifference = alarmMinutes - currentMinutes
-
-            // Adjust for cases where the alarm is set for the next day
-            if timeDifference < 0 {
-                timeDifference += 24 * 60
-            }
-
-            // Convert timeDifference to seconds for comparison with lockTime
-            let timeDifferenceSeconds = TimeInterval(timeDifference * 60)
+            // Calculate timeDifferenceSeconds for comparison with lockTime
+            let timeDifferenceSeconds = calculateTimeDifferenceSeconds(alarm)
 
             if timeDifferenceSeconds > 0 && timeDifferenceSeconds < alarm.lockTime && alarm.isEnabled {
                 // Don't allow deleting the alarm if it's within the lock time
@@ -171,5 +144,24 @@ class AlarmManager: ObservableObject {
             cancelAlarm(alarms[index])
             alarms.remove(at: index)
         }
+    }
+
+    private func calculateTimeDifferenceSeconds(_ alarm: Alarm) -> TimeInterval {
+        let calendar = Calendar.current
+        let currentTime = calendar.dateComponents([.hour, .minute], from: Date())
+        let alarmTime = calendar.dateComponents([.hour, .minute], from: alarm.time)
+
+        // Calculate time difference in minutes
+        let currentMinutes = currentTime.hour! * 60 + currentTime.minute!
+        let alarmMinutes = alarmTime.hour! * 60 + alarmTime.minute!
+        var timeDifference = alarmMinutes - currentMinutes
+
+        // Adjust for cases where the alarm is set for the next day
+        if timeDifference < 0 {
+            timeDifference += 24 * 60
+        }
+
+        // Convert timeDifference to seconds
+        return TimeInterval(timeDifference * 60)
     }
 }

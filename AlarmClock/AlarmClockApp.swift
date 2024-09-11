@@ -1,6 +1,5 @@
 import SwiftUI
 
-// TODO: do we need labels?
 // TODO: move wav file to assets
 // TODO: add app icon
 // TODO: fix project structure
@@ -9,6 +8,7 @@ import SwiftUI
 // TODO: force alarm notification to repeat until closed
 // TODO: persist alarms
 // TODO: edit alarm
+// TODO: block app work without notification permission
 @main
 struct AlarmClockApp: App {
     init() {

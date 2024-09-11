@@ -26,9 +26,10 @@ struct AddAlarmView: View {
             .navigationBarItems(
                 leading: Button("Cancel") { presentationMode.wrappedValue.dismiss() },
                 trailing: Button("Save") {
+                    let trimmedLabel = label.trimmingCharacters(in: .whitespacesAndNewlines)
                     let newAlarm = Alarm(
                         time: time,
-                        label: label,
+                        label: trimmedLabel,
                         lockTime: lockTimeMinutes * 60,
                         wakeUpCheckDelay: wakeUpCheckDelayMinutes * 60
                     )
