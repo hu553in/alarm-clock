@@ -15,7 +15,7 @@ class AlarmManager: ObservableObject {
         if let index = alarms.firstIndex(where: { $0.id == alarm.id }) {
             DispatchQueue.global(qos: .userInitiated).async {
                 // Calculate timeDifferenceSeconds for comparison with lockTime
-                let timeDifferenceSeconds = calculateTimeDifferenceSeconds(alarm)
+                let timeDifferenceSeconds = self.calculateTimeDifferenceSeconds(alarm)
 
                 DispatchQueue.main.async {
                     if timeDifferenceSeconds > 0 && timeDifferenceSeconds < alarm.lockTime && alarm.isEnabled {
@@ -133,7 +133,7 @@ class AlarmManager: ObservableObject {
     func deleteAlarm(_ alarm: Alarm) {
         if let index = alarms.firstIndex(where: { $0.id == alarm.id }) {
             // Calculate timeDifferenceSeconds for comparison with lockTime
-            let timeDifferenceSeconds = calculateTimeDifferenceSeconds(alarm)
+            let timeDifferenceSeconds = self.calculateTimeDifferenceSeconds(alarm)
 
             if timeDifferenceSeconds > 0 && timeDifferenceSeconds < alarm.lockTime && alarm.isEnabled {
                 // Don't allow deleting the alarm if it's within the lock time
