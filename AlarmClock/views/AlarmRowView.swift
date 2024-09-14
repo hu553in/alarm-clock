@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AlarmRow: View {
+struct AlarmRowView: View {
     @ObservedObject var alarm: Alarm
     @ObservedObject var alarmManager: AlarmManager
     @State private var isEnabled: Bool
@@ -41,7 +41,7 @@ struct AlarmRow: View {
             }, label: {
                 Label("Duplicate", systemImage: "plus.square.on.square")
             })
-            Button(action: {
+            Button(role: .destructive, action: {
                 showingDeleteConfirmation = true
             }, label: {
                 Label("Delete", systemImage: "trash")

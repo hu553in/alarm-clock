@@ -10,8 +10,8 @@
 		500893C72C8F81EA00C0EF28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 500893C62C8F81EA00C0EF28 /* Assets.xcassets */; };
 		500893CA2C8F81EA00C0EF28 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 500893C92C8F81EA00C0EF28 /* Preview Assets.xcassets */; };
 		500893D72C8F848600C0EF28 /* AlarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500893D02C8F848600C0EF28 /* AlarmManager.swift */; };
-		500893D82C8F848600C0EF28 /* ultra_loud_alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = 500893D12C8F848600C0EF28 /* ultra_loud_alarm.wav */; };
-		500893D92C8F848600C0EF28 /* AlarmRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500893D22C8F848600C0EF28 /* AlarmRow.swift */; };
+		500893D82C8F848600C0EF28 /* Sound 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 500893D12C8F848600C0EF28 /* Sound 1.wav */; };
+		500893D92C8F848600C0EF28 /* AlarmRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500893D22C8F848600C0EF28 /* AlarmRowView.swift */; };
 		500893DA2C8F848600C0EF28 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500893D32C8F848600C0EF28 /* Alarm.swift */; };
 		500893DB2C8F848600C0EF28 /* AddAlarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500893D42C8F848600C0EF28 /* AddAlarmView.swift */; };
 		500893DC2C8F848600C0EF28 /* AlarmClockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500893D52C8F848600C0EF28 /* AlarmClockApp.swift */; };
@@ -23,8 +23,8 @@
 		500893C62C8F81EA00C0EF28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		500893C92C8F81EA00C0EF28 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		500893D02C8F848600C0EF28 /* AlarmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmManager.swift; sourceTree = "<group>"; };
-		500893D12C8F848600C0EF28 /* ultra_loud_alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ultra_loud_alarm.wav; sourceTree = "<group>"; };
-		500893D22C8F848600C0EF28 /* AlarmRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmRow.swift; sourceTree = "<group>"; };
+		500893D12C8F848600C0EF28 /* Sound 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Sound 1.wav"; sourceTree = "<group>"; };
+		500893D22C8F848600C0EF28 /* AlarmRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmRowView.swift; sourceTree = "<group>"; };
 		500893D32C8F848600C0EF28 /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		500893D42C8F848600C0EF28 /* AddAlarmView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAlarmView.swift; sourceTree = "<group>"; };
 		500893D52C8F848600C0EF28 /* AlarmClockApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmClockApp.swift; sourceTree = "<group>"; };
@@ -61,13 +61,11 @@
 		500893C12C8F81E800C0EF28 /* AlarmClock */ = {
 			isa = PBXGroup;
 			children = (
-				500893D42C8F848600C0EF28 /* AddAlarmView.swift */,
+				50FE01B72C95EC30009C0D06 /* views */,
 				500893D32C8F848600C0EF28 /* Alarm.swift */,
 				500893D52C8F848600C0EF28 /* AlarmClockApp.swift */,
 				500893D02C8F848600C0EF28 /* AlarmManager.swift */,
-				500893D22C8F848600C0EF28 /* AlarmRow.swift */,
-				500893D62C8F848600C0EF28 /* ContentView.swift */,
-				500893D12C8F848600C0EF28 /* ultra_loud_alarm.wav */,
+				50FE01B62C95E83E009C0D06 /* sounds */,
 				500893C62C8F81EA00C0EF28 /* Assets.xcassets */,
 				500893C82C8F81EA00C0EF28 /* Preview Content */,
 			);
@@ -80,6 +78,24 @@
 				500893C92C8F81EA00C0EF28 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		50FE01B62C95E83E009C0D06 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				500893D12C8F848600C0EF28 /* Sound 1.wav */,
+			);
+			path = sounds;
+			sourceTree = "<group>";
+		};
+		50FE01B72C95EC30009C0D06 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				500893D42C8F848600C0EF28 /* AddAlarmView.swift */,
+				500893D22C8F848600C0EF28 /* AlarmRowView.swift */,
+				500893D62C8F848600C0EF28 /* ContentView.swift */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,7 +159,7 @@
 			files = (
 				500893CA2C8F81EA00C0EF28 /* Preview Assets.xcassets in Resources */,
 				500893C72C8F81EA00C0EF28 /* Assets.xcassets in Resources */,
-				500893D82C8F848600C0EF28 /* ultra_loud_alarm.wav in Resources */,
+				500893D82C8F848600C0EF28 /* Sound 1.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				500893D92C8F848600C0EF28 /* AlarmRow.swift in Sources */,
+				500893D92C8F848600C0EF28 /* AlarmRowView.swift in Sources */,
 				500893DC2C8F848600C0EF28 /* AlarmClockApp.swift in Sources */,
 				500893DD2C8F848600C0EF28 /* ContentView.swift in Sources */,
 				500893D72C8F848600C0EF28 /* AlarmManager.swift in Sources */,

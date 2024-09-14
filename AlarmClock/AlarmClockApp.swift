@@ -1,14 +1,6 @@
 import SwiftUI
 import UserNotifications
 
-// TODO: move wav file to assets
-// TODO: add app icon
-// TODO: fix project structure
-// TODO: fix alarm notification
-// TODO: fix wake up check
-// TODO: force alarm notification to repeat until closed
-// TODO: persist alarms
-// TODO: edit alarm
 @main
 struct AlarmClockApp: App {
     @State private var isNotificationAuthorized = false
@@ -34,7 +26,7 @@ struct AlarmClockApp: App {
                 switch settings.authorizationStatus {
                 case .authorized, .provisional:
                     self.isNotificationAuthorized = true
-                case .denied, .notDetermined:
+                case .denied, .notDetermined, .ephemeral:
                     self.isNotificationAuthorized = false
                 @unknown default:
                     self.isNotificationAuthorized = false

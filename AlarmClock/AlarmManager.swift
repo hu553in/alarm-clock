@@ -42,7 +42,7 @@ class AlarmManager: ObservableObject {
         let content = UNMutableNotificationContent()
         content.title = "Alarm"
         content.body = "Wake up!"
-        content.sound = UNNotificationSound(named: UNNotificationSoundName("ultra_loud_alarm.wav"))
+        content.sound = UNNotificationSound(named: UNNotificationSoundName("Sound 1.wav"))
 
         let calendar = Calendar.current
         var dateComponents = calendar.dateComponents([.hour, .minute], from: alarm.time)
@@ -105,7 +105,7 @@ class AlarmManager: ObservableObject {
         let content = UNMutableNotificationContent()
         content.title = "Alarm"
         content.body = "Wake up!"
-        content.sound = UNNotificationSound(named: UNNotificationSoundName("ultra_loud_alarm.wav"))
+        content.sound = UNNotificationSound(named: UNNotificationSoundName("Sound 1.wav"))
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(
@@ -137,7 +137,6 @@ class AlarmManager: ObservableObject {
 
             if timeDifferenceSeconds > 0 && timeDifferenceSeconds < alarm.lockTime && alarm.isEnabled {
                 // Don't allow deleting the alarm if it's within the lock time
-                // TODO: show error
                 return
             }
 

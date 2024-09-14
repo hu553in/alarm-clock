@@ -6,11 +6,23 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(alarmManager.alarms) { alarm in
-                    AlarmRow(alarm: alarm, alarmManager: alarmManager)
+            Group {
+                if alarmManager.alarms.isEmpty {
+                    VStack {
+                        Text("No alarms")
+                            .font(.title)
+                            .foregroundColor(.secondary)
+                        Text("Tap + to create your first alarm")
+                            .foregroundColor(.secondary)
+                    }
+                } else {
+                    List {
+                        ForEach(alarmManager.alarms) { alarm in
+                            AlarmRowView(alarm: alarm, alarmManager: alarmManager)
+                        }
+                        .onDelete(perform: deleteAlarm)
+                    }
                 }
-                .onDelete(perform: deleteAlarm)
             }
             .navigationTitle("Alarms")
             .toolbar {

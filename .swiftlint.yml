@@ -1,6 +1,3 @@
-disabled_rules:
-  - todo
-
 opt_in_rules:
   - control_statement
   - trailing_newline
