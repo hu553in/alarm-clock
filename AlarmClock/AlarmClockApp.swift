@@ -1,4 +1,5 @@
 import SwiftUI
+import UserNotifications
 
 // TODO: move wav file to assets
 // TODO: add app icon
@@ -8,22 +9,59 @@ import SwiftUI
 // TODO: force alarm notification to repeat until closed
 // TODO: persist alarms
 // TODO: edit alarm
-// TODO: block app work without notification permission
 @main
 struct AlarmClockApp: App {
-    init() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
-            if granted {
-                print("Notification permission granted")
-            } else {
-                print("Notification permission denied")
+    @State private var isNotificationAuthorized = false
+
+    var body: some Scene {
+        WindowGroup {
+            Group {
+                if isNotificationAuthorized {
+                    ContentView()
+                } else {
+                    NotificationPermissionView(isAuthorized: $isNotificationAuthorized)
+                }
+            }
+            .onAppear {
+                checkNotificationAuthorization()
             }
         }
     }
 
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
+    private func checkNotificationAuthorization() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                switch settings.authorizationStatus {
+                case .authorized, .provisional:
+                    self.isNotificationAuthorized = true
+                case .denied, .notDetermined:
+                    self.isNotificationAuthorized = false
+                @unknown default:
+                    self.isNotificationAuthorized = false
+                }
+            }
+        }
+    }
+}
+
+struct NotificationPermissionView: View {
+    @Binding var isAuthorized: Bool
+
+    var body: some View {
+        VStack {
+            Text("Notifications are required for this app to function.")
+                .padding()
+            Button("Request Permission") {
+                requestNotificationPermission()
+            }
+        }
+    }
+
+    private func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+            DispatchQueue.main.async {
+                self.isAuthorized = granted
+            }
         }
     }
 }
